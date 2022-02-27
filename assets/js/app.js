@@ -5,11 +5,11 @@ const formatUnits = '&units=imperial';
 const getWeather = function(data) {
     let nameValue = data['name'];
     let tempValue = data['main']['temp'];
-    let descValue = data['weather'][0]['description'];
+    // let descValue = data['weather'][0]['description'];
 
     $('.name').html(nameValue);
-    $('.temp').html(tempValue + '° F');
-    $('.desc').html(descValue);
+    $('.temp').html(tempValue + '°F');
+    // $('.desc').html(descValue);
 }
 
 $('.button').on('click', function() {

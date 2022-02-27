@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Shippori Antique B1', sans-serif;
 }
 
 header {
@@ -15,7 +15,6 @@ header {
 }
 
 input[type="text"] {
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 20px;
     background-color: #f7f7f7;
@@ -27,7 +26,6 @@ input[type="text"] {
 input[type="submit"] {
     color: #e7e7e7;
     background: #5098e6;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 20px;
     border: none;
@@ -48,3 +46,34 @@ input[type="submit"]:hover {
     border: 1px solid black;
     border-radius: 10px;
 }
+
+.line-break {
+    border-bottom: 2px solid black;
+}
+
+.saved-cities {
+    color: #2b2b2b;
+    background: #aeaeae;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.saved-cities:hover {
+    background: #979797;
+}
+
+.card {
+    background-color: #2d3e50;
+    color: white;
+}
+
+.uv-color {
+    padding: 2px;
+    color: white;
+    background-color: green;
+}
+
