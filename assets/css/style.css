@@ -71,9 +71,35 @@ input[type="submit"]:hover {
     color: white;
 }
 
-.uv-color {
+.uv {
     padding: 2px;
     color: white;
-    background-color: green;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.uv-none {
+    background-color: rgb(141, 141, 141);
+}
+
+.uv-low {
+    background-color: #1fb714;
+}
+
+.uv-moderate {
+    color: black;
+    background-color: #fdf306;
+}
+
+.uv-high {
+    background-color: #ff9900;
+}
+
+.uv-very-high {
+    background-color: #de0806;
+}
+
+.uv-extreme {
+    background-color: #cc99fe;
 }
 
