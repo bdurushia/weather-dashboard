@@ -28,6 +28,7 @@ const fetchCityData = function(cityName){
         getWeather(data);
 
         // check if city has been saved to previous searches
+        cityName = data['name'];
         let cityNameLower = cityName.toLowerCase();
         if(cityArr[0] === undefined){
             cityArr.push(cityNameLower);
