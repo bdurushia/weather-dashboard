@@ -31,15 +31,19 @@
             </div>
 
             <div class="col m-2">
-                <div class="display col p-5 m-2">
-                    <h2 class="name"></h2>
+                <div class="display col p-2 m-2">
+                    <div class="name-date-icon d-flex">
+                        <h2 class="name"></h2>
+                        <div id="wiconDiv">
+                            <img id="wicon" src="" alt="Weather Icon" style="display: none">
+                        </div>
+                    </div>
+                    <h5 class="current-date"></h5>
                     <p class="temp"></p>
-
-                    <!-- <h2 class="name">Denver (02/27/2022)</h2>
-                    <p class="temp">Temp: 42.02°F</p>
-                    <p class="wind">Wind: 6.67 MPH</p>
-                    <p class="humidity">Humidity: 46%</p>
-                    <p class="uv-index">UV Index: <span class="uv uv-low">0.47</span></p> -->
+                    <p class="wind"></p>
+                    <p class="humidity"></p>
+                    <p class="uv-index"></p>
+                    <!-- <span class="uv uv-low"></span> -->
                 </div>
 
                 <div class="col m-2 py-3">
@@ -105,8 +109,16 @@
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" 
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer">
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./app.js"></script>
+    <script src="./assets/js/app.js"></script>
 </body>
 </html>

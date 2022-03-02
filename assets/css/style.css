@@ -40,11 +40,18 @@ input[type="submit"]:hover {
 }
 
 .display {
-    height: 30vh;
     text-align: center;
     background-color: #f7f7f7;
     border: 1px solid black;
     border-radius: 10px;
+}
+
+.display p {
+    margin: 5px;
+}
+
+.name-date-icon {
+    justify-content: center;
 }
 
 .line-break {
