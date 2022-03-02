@@ -8,6 +8,49 @@ let longitude;
 
 let today = moment().format('MM/DD/YYYY');
 
+const createCard = function(dateValue, tempValue, windValue, humidityValue, iconValue){
+
+    let card = $('<div>').addClass('card mx-3 container-fluid')
+    let cardBody = $('<div>').addClass('card-body');
+
+    let headerEl = $('<h5>')
+        .addClass('forecast-date card-title')
+        .text(dateValue);
+
+    let iconDiv = $('<div>')
+        .prop('id', 'wiconDiv');
+
+    let iconURL = "http://openweathermap.org/img/w/" + iconValue + ".png";
+
+    let imgIconEl = $('<img>')
+        .prop('id', 'wicon')
+        .attr('src', iconURL)
+        .attr('alt', 'Weather Icon')
+        .attr('style', 'display: inline');
+
+    let tempEl = $('<p>')
+        .addClass('card-text card-temp')
+        .text('Temp: ' + tempValue + '°F');
+
+    let windEl = $('<p>')
+        .addClass('card-text card-wind')
+        .text('Wind: ' + windValue + ' mph');
+
+    let humidityEl = $('<p>')
+        .addClass('card-text card-humidity')
+        .text('Humidity: ' + humidityValue + '%');
+
+    $('.five-day-container')
+        .append(card
+            .append(cardBody
+                .append(headerEl, 
+                    iconDiv
+                        .append(imgIconEl), 
+                    tempEl, 
+                    windEl, 
+                    humidityEl)));
+}
+
 const getWeather = function(data) {
     let nameValue = data['name'];
     let tempValue = data['main']['temp'];
@@ -32,7 +75,16 @@ const getWeather = function(data) {
 }
 
 const getFiveDayForecast = function(data) {
-    console.log(data['daily']['0']['temp']['day']);
+    for (let i = 0; i < 5; i++) {
+        let dateValue = moment().add((1 + i), 'd').format('MM/DD/YYYY');
+        let tempValue = data['daily'][i]['temp']['day'];
+        let windValue = data['daily'][i]['wind_speed'];
+        let humidityValue = data['daily'][i]['humidity'];
+
+        let iconValue = data['daily'][i]['weather']['0']['icon'];
+        
+        createCard(dateValue, tempValue, windValue, humidityValue, iconValue);
+    }
 }
 
 const useUviData = function(uviValue) {
@@ -101,12 +153,21 @@ const saveCity = function(){
     $('.searched-container').append(cityBtnEl);
 }
 
+const displayContainers = function() {
+    $('.display').attr('style', 'display: block');
+    $('.forecast').attr('style', 'display: block');
+}
+
 $('.button').on('click', function() {
+    $('.five-day-container').empty();
     let cityName = $('#inputValue').val();
     fetchCityData(cityName);
+    displayContainers();
 })
 
 $(document).on('click', '.saved-cities', function() {
+    $('.five-day-container').empty();
     let cityName = $(this).attr('id');
     fetchCityData(cityName);
+    displayContainers();
 })
