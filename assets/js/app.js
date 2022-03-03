@@ -122,9 +122,6 @@ const fetchUvAndFiveDayData = function(latitude, longitude){
 
         useUviData(uviValue);
         getFiveDayForecast(data);
-
-        console.log(uvApi + lat + lon + '&exclude=hourly' + formatUnits + apiKey);
-        console.log(data);
     })
     .catch(err => console.log(err))
 }
@@ -160,7 +157,7 @@ const saveLocalStorage = function(){
 // get saved cities from local storay and display to page
 const getLocalStorage = function(){
     cityArr = JSON.parse(localStorage.getItem("cities"));
-    console.log(cityArr);
+
     if (!cityArr) {
         cityArr = [];
     }
