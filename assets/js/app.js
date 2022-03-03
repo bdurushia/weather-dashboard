@@ -2,12 +2,14 @@ const weatherApi = 'https://api.openweathermap.org/data/2.5/weather?q=';
 const uvApi = 'https://api.openweathermap.org/data/2.5/onecall?';
 const apiKey = '&appid=e640147e850ba07b1d476b32c5705f94';
 const formatUnits = '&units=imperial';
-const cityArr = [];
+let cityArr = [];
 let latitude;
 let longitude;
 
+// set todays date
 let today = moment().format('MM/DD/YYYY');
 
+// Create Five Day Forecast cards
 const createCard = function(dateValue, tempValue, windValue, humidityValue, iconValue){
 
     let card = $('<div>').addClass('card mx-3 container-fluid')
@@ -51,6 +53,7 @@ const createCard = function(dateValue, tempValue, windValue, humidityValue, icon
                     humidityEl)));
 }
 
+// Get current weather data
 const getWeather = function(data) {
     let nameValue = data['name'];
     let tempValue = data['main']['temp'];
@@ -74,6 +77,7 @@ const getWeather = function(data) {
     fetchUvAndFiveDayData(latitude, longitude, uviValue);
 }
 
+// get five day forecast weather, assign values to weather cards
 const getFiveDayForecast = function(data) {
     for (let i = 0; i < 5; i++) {
         let dateValue = moment().add((1 + i), 'd').format('MM/DD/YYYY');
@@ -87,6 +91,7 @@ const getFiveDayForecast = function(data) {
     }
 }
 
+// Use UVI data value and change div color based on how high or low the value is
 const useUviData = function(uviValue) {
     $('.uv-index').html('UV Index: ');
     let uvSpanEl = $('<span>').prop('id', 'uvi').addClass('uv uv-none').text(uviValue);
@@ -105,6 +110,7 @@ const useUviData = function(uviValue) {
     }
 }
 
+// fetch fiveday forecast data by city coordinates retrieved from fetchCityData, passing in lat and lon
 const fetchUvAndFiveDayData = function(latitude, longitude){
     const lat = 'lat=' + latitude;
     const lon = '&lon=' + longitude;
@@ -123,6 +129,7 @@ const fetchUvAndFiveDayData = function(latitude, longitude){
     .catch(err => console.log(err))
 }
 
+// fetch current weather data by city name
 const fetchCityData = function(cityName){
     fetch(weatherApi + cityName + formatUnits + apiKey)
     .then(response => response.json())
@@ -145,7 +152,32 @@ const fetchCityData = function(cityName){
     .catch(err => console.log(err))
 }
 
+// save searched cities to local storage
+const saveLocalStorage = function(){
+    localStorage.setItem("cities", JSON.stringify(cityArr));
+}
+
+// get saved cities from local storay and display to page
+const getLocalStorage = function(){
+    cityArr = JSON.parse(localStorage.getItem("cities"));
+    console.log(cityArr);
+    if (!cityArr) {
+        cityArr = [];
+    }
+    
+    $.each(cityArr, function(i) {
+        let name = cityArr[i];
+        let cityBtnEl = $('<buttom type="submit">')
+            .addClass('saved-cities container-fluid my-2')
+            .prop('id', name)
+            .text(name);
+        $('.searched-container').append(cityBtnEl);
+    })
+}
+
+// save cities searched to clickable buttons on page
 const saveCity = function(){
+    saveLocalStorage(cityArr);
     let cityBtnEl = $('<buttom type="submit">')
         .addClass('saved-cities container-fluid my-2')
         .prop('id', $('.name').text())
@@ -153,11 +185,15 @@ const saveCity = function(){
     $('.searched-container').append(cityBtnEl);
 }
 
+// display containers when a fetch button is first clicked, pageload hides containers
 const displayContainers = function() {
     $('.display').attr('style', 'display: block');
     $('.forecast').attr('style', 'display: block');
 }
 
+getLocalStorage();
+
+// search (input) button
 $('.button').on('click', function() {
     $('.five-day-container').empty();
     let cityName = $('#inputValue').val();
@@ -165,6 +201,7 @@ $('.button').on('click', function() {
     displayContainers();
 })
 
+// Saved cities buttons
 $(document).on('click', '.saved-cities', function() {
     $('.five-day-container').empty();
     let cityName = $(this).attr('id');
